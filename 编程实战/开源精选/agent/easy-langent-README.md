@@ -1,0 +1,135 @@
+<!--
+来源: https://raw.githubusercontent.com/datawhalechina/easy-langent/main/README.md
+拉取时间: 2026-11-06 Asia/Shanghai
+仅供本地学习对照；遵守上游许可证，勿再分发未授权内容。
+-->
+
+<div align='center'>
+    <img src="./logo.png" alt="alt text" width="100%">
+    <h1>Easy-langent</h1>
+</div>
+
+<div align="center">
+
+[![GitHub stars](https://img.shields.io/github/stars/datawhalechina/easy-langent?style=flat-square)](https://github.com/datawhalechina/easy-langent/stargazers) [![GitHub forks](https://img.shields.io/github/forks/datawhalechina/easy-langent?style=flat-square)](https://github.com/datawhalechina/easy-langent/network/members) [![GitHub issues](https://img.shields.io/github/issues/datawhalechina/easy-langent?style=flat-square)](https://github.com/datawhalechina/easy-langent/issues) [![GitHub license](https://img.shields.io/github/license/datawhalechina/easy-langent?style=flat-square)](https://github.com/datawhalechina/easy-langent/blob/main/LICENSE)
+
+</div>
+
+<div align="center">
+    📚 在线阅读：
+    <a href="https://datawhalechina.github.io/easy-langent/" target="_blank" style="text-decoration: none; color: #007bff; margin: 0 5px;"><strong>GitHub Pages</strong></a> |
+    <a href="https://easy-langent.datawhale.cc/" target="_blank" style="text-decoration: none; color: #28a745; margin: 0 5px;"><strong>国内镜像</strong></a>
+</div>
+
+## 🚀项目介绍
+
+当大模型技术从“单点能力突破”迈向“场景化应用落地”，智能体（Agent）已成为连接技术与实际需求的核心载体。然而，多数初学者在接触智能体开发时，常陷入“框架概念繁杂、实操无从下手、技术与应用脱节”的困境——要么被复杂的理论体系吓退，要么掌握了框架基础却不知如何落地真实项目。
+
+“langent”由“lang”（代表LangChain、LangGraph等语言大模型开发框架）与“agent”（智能体）合并而来，核心目标是打破“理论学习”与“实战开发”的壁垒：让读者在系统掌握智能体核心逻辑的同时，真正学会运用LangChain、LangGraph框架解决实际开发问题，实现“从懂概念到会开发”的跨越。
+
+我们摒弃冗余的理论堆砌，聚焦“用框架做开发”的核心需求，每一章都配套针对性的实操任务，确保读者在学习过程中能够动手实践、深化理解。
+
+本项目配套的学习大纲遵循“循序渐进、实践导向”的设计原则，从框架基础认知入手，逐步深入核心组件实操、进阶应用开发，再到多智能体协作与系统优化，最终完成综合实战项目。
+
+## 📌项目受众
+
+无论你是希望入门智能体开发的高校学生，还是寻求技术落地的开发者，都能通过本项目找到清晰的学习路径。
+
+**前置知识要求：**
+
+- 熟悉Python编程语言基础
+- 对大模型技术有基本了解
+- 对智能体的核心概念有基本了解
+
+如果你还不掌握上述前置知识，建议先完成以下课程：
+
+- [Happy-llm](https://github.com/datawhalechina/happy-llm)
+- [Hello-Agents](https://github.com/datawhalechina/hello-agents)
+
+
+## 📖 内容导航
+
+| 章节                                              | 关键内容                     | 状态 |
+| ------------------------------------------------- | ---------------------------- | ---- |
+| <strong>第一部分：前言</strong> |  |  |
+| [前言](./docs/guide/前言.md)        | 前言与读者建议   | ✅    |
+| [第一章 LangChain与LangGraph框架认知](./docs/guide/chapter1.md) |  框架介绍、环境安装、lang框架体验| ✅    | 
+| <strong>第二部分：LangChain组件与实战</strong> |  |  |
+| [第二章 LangChain核心组件实操](./docs/guide/chapter2.md) | 模型调用、提示词模板、输出解析 | ✅    |
+| [第三章 LangChain进阶组件实操](./docs/guide/chapter3.md) | 记忆、工具、组合实践 | ✅    |
+| [第四章 LangChain应用级系统设计与RAG实践](./docs/guide/chapter4.md) | 链式工作流、RAG实践 | ✅    |
+| [第五章 课程中期综合实践：智能体应用设计与实现](./docs/guide/chapter5.md) | 中期综合实践 | ✅    |
+| <strong>第三部分：LangGraph组件与实战</strong> |  |  |
+| [第六章 LangGraph基础：有状态工作流与核心概念实操](./docs/guide/chapter6.md) | 有状态工作流、节点、边、状态管理 | ✅    |
+| [第七章 LangGraph进阶：多智能体协作与复杂流程管控](./docs/guide/chapter7.md) | 多智能体协作、复杂流程管控 | ✅    |
+| [第八章 综合实战：构建"谁是卧底"游戏智能体](./docs/guide/chapter8.md) | 综合实战 | ✅    |
+| [结语](./docs/guide/结语.md)        | 项目总结与展望   | ✅    |
+
+## 🤖 智能体 Agent 项目合集
+**📌 内测组队学习优秀课程项目**
+| 项目名称                                                 | 备注              | 作者    |
+| -------------------------------------------------------- | ----------------- | ------- |
+| [狼人杀（上帝视角）](./project/werewolfGameAi/README.md) | 基于langgraph开发 | 内测组  |
+
+**📌 202604组队学习优秀课程项目**
+| 项目名称                                                 | 备注              | 作者    |
+| -------------------------------------------------------- | ----------------- | ------- |
+| [剧本杀4人版](./project/ScriptedMurderGame/README.md) | 基于langgraph开发 | winnerFlyer  |
+| [智能知识库问答](./project/AgenticRag/README.md)         | 基于langchain开发 | jspi-fu |
+| [MCPChat](./project/MCPChat/README.md)                   | 基于langchain开发 | jspi-fu |
+| [数据处理智能体](./project/DataAgent/README.md)          | 基于langchain开发 | jspi-fu |
+| [医疗RAG诊断](./project/MedicalRag/README.md)            | 基于langchain开发  |道法自然|
+| [谁是卧底增强版](./project/WhoIsTheSpyBaocaiLi/readme.md)            | 基于langgraph开发  |道法自然|
+| [个人助手](./project/PersonalMemoryAssistant/README.md)  | 基于langchain开发  |念安|
+| [AI面试官](./project/RecruitingInterviewAgentDemo/Readme.md)  | 基于langgraph开发  |念安|
+| [客服工单智能处理](./project/TicketReviewAgentDemo/Readme.md)  | 基于langgraph开发  |念安|
+| [辩论赛4人版](./project/DebateGame/README.md)  | 基于langgraph开发  |WangDF2022|
+| [哈尔滨冰雪大世界舆情分析](./project/HarbinIceSnowOpinionDecision/README.md)  | 基于langgraph开发  |tian09150714|
+
+## ✨核心贡献者
+- [牧小熊-项目负责人](https://github.com/muxiaoxiong)(Datawhale成员)
+- [柯慕灵-项目贡献者](https://github.com/1985312383)(Datawhale成员)
+
+## ❤️特别感谢
+
+- 感谢 [@Sm1les](https://github.com/Sm1les) 对本项目的帮助与支持
+- 感谢内测组对本项目的帮助与支持
+     [Zeno](https://github.com/ZENO-CHOW)
+- 感谢所有为本项目做出贡献的开发者们 ❤️
+
+<div align="left">
+
+<a href="https://github.com/datawhalechina/easy-langent/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=datawhalechina/easy-langent&v=1" />
+</a>
+
+</div>
+
+
+## 🧑‍💻参与贡献
+
+- 如果你发现了一些问题，可以提Issue进行反馈，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
+- 如果你想参与贡献本项目，可以提Pull request，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
+- 如果你对 Datawhale 很感兴趣并想要发起一个新的项目，请按照[Datawhale开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)进行操作即可~
+
+## 📊 Star History
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=datawhalechina/easy-langent&type=Date&theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=datawhalechina/easy-langent&type=Date" />
+  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=datawhalechina/easy-langent&type=Date" />
+</picture>
+</div>
+
+## 🌟关注我们
+
+<div align=center>
+<p>扫描下方二维码关注公众号：Datawhale</p>
+<img src="https://raw.githubusercontent.com/datawhalechina/pumpkin-book/master/res/qrcode.jpeg" width = "180" height = "180">
+</div>
+
+## LICENSE
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
