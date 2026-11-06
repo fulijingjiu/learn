@@ -13,7 +13,7 @@
 | A | Atomicity | 原子性 | 要么全成功，要么全撤销 |
 | C | Consistency | 一致性 | 事务前后数据满足约束（业务+库约束） |
 | I | Isolation | 隔离性 | 并发事务互不干扰（靠隔离级别） |
-| D | Durability | 持久性 | 提交后断电也不丢（靠 redo 等） |
+| D | Durability | 持久性 | 提交后持久保存；依赖 redo、刷盘策略与可靠存储 |
 
 InnoDB 里常见支撑：undo（回滚/MVCC）、redo（持久化）、锁 + MVCC（隔离）。
 
@@ -28,13 +28,13 @@ InnoDB 里常见支撑：undo（回滚/MVCC）、redo（持久化）、锁 + MVC
 | 概念 | 英文 | 要点 |
 |---|---|---|
 | 行锁 | Row lock | InnoDB 默认尽量锁行，并发好 |
-| 表锁 | Table lock | MyISAM 典型；InnoDB 在 DDL、或某些全表操作时也会升到表级 |
+| 表锁 | Table lock | MyISAM 典型；InnoDB 也有表级锁，但大量行锁不会自动升级为表锁，DDL 另涉及 MDL |
 | 共享 / 排他 | S / X | 读共享、写排他；X 与其它冲突 |
 | 意向锁 | Intention lock（IS/IX） | 表级「信号灯」：表示「我下面有行要加 S/X」，方便快速判断表锁能否加上 |
 | 间隙锁 | Gap lock | 锁索引记录之间的间隙，防插入，配合 RR 减幻读 |
 | 临键锁 | Next-key lock | 记录锁 + 间隙锁；InnoDB RR 下常见加锁单位 |
 
-加锁还跟「有没有走索引、隔离级别」有关：没索引可能锁更多，甚至接近表级效果。
+加锁范围取决于访问路径、条件与隔离级别：无合适索引可能锁大量扫描记录/间隙，影响很广，但不是行锁升级。详见新锁专题。
 
 ### 面试口述版
 
@@ -93,7 +93,7 @@ InnoDB 里常见支撑：undo（回滚/MVCC）、redo（持久化）、锁 + MVC
 
 ---
 
-## 6. EXPLAIN 常见 type（从好到差，常见说法）
+## 6. EXPLAIN 常见 type（访问方式，不是绝对性能排名）
 
 | type | 含义（口语） |
 |---|---|
@@ -101,21 +101,21 @@ InnoDB 里常见支撑：undo（回滚/MVCC）、redo（持久化）、锁 + MVC
 | eq_ref | 唯一索引等值，联表时常出现 |
 | ref | 非唯一索引等值 |
 | range | 索引范围扫（`>`、`BETWEEN`、部分 `IN`） |
-| index | 扫整个索引树（比全表强一点） |
-| ALL | 全表扫描，最差常见情况 |
+| index | 扫整个索引；是否更好取决于覆盖、宽度与回表代价 |
+| ALL | 全表扫描；小表或读取大比例数据时也可能合理 |
 
 还看：`key`（用了哪个索引）、`rows`（估计扫多少行）、`Extra`（如 `Using index` 覆盖索引、`Using filesort`、`Using temporary`）。
 
 ### 面试口述版
 
-> EXPLAIN 里我先看 type：尽量别是 ALL；再看 key、rows、Extra。出现 Using index 往往是覆盖索引，好信号；filesort、temporary 要警惕。
+> 我结合业务选择率看访问方式、key、rows/filtered 和 Extra，再对照受控环境的实际扫描量。Using index 常提示覆盖索引；filesort 不等于必然磁盘排序，ALL 也不等于必错。优化目标是总成本与真实耗时，不是只把 type 改得好看。
 
 ---
 
 ## 7. 主从复制（Replication）
 
 - 常见链路：**主库写 binlog → 从库 IO 线程拉 relay log → SQL 线程回放**。
-- 作用：读写分离、备份、高可用底座。
+- 作用：读写分离、高可用底座，也可辅助备份；复制不能代替独立备份与时间点恢复。
 - 注意：默认多为**异步**，主从可能短暂延迟；有半同步等增强（视版本与配置）。
 - 面试常提：复制格式 STATEMENT / ROW / MIXED；GTID 便于故障切换（常见说法）。
 
@@ -146,7 +146,7 @@ InnoDB 里常见支撑：undo（回滚/MVCC）、redo（持久化）、锁 + MVC
 ## 9. 慢 SQL 排查
 
 1. 开 **慢查询日志 slow query log**（或云监控）。
-2. `EXPLAIN` / `EXPLAIN ANALYZE`（版本支持时）看计划。
+2. 先 `EXPLAIN` 看估计计划；`EXPLAIN ANALYZE` 会真实执行，只在受控环境对适用查询使用。
 3. 看有没有索引、是否回表过多、是否临时表/文件排序。
 4. `SHOW PROCESSLIST` 看当前卡住谁。
 5. 业务侧：少 `SELECT *`、控制深分页、避免大事务、注意 N+1。
@@ -167,4 +167,21 @@ InnoDB 里常见支撑：undo（回滚/MVCC）、redo（持久化）、锁 + MVC
 | 聚簇 / 回表基础 | [`MySQL-聚簇与非聚簇索引.md`](./MySQL-聚簇与非聚簇索引.md) |
 | 联合索引 | [`MySQL-最左前缀原则.md`](./MySQL-最左前缀原则.md) |
 
-临考三库对照：[`三库对比速查.md`](./三库对比速查.md)
+临考三库对照：[`三库对比速查.md`](../05-对比/三库对比速查.md)
+
+## 11. 对照开源后补强的详细专篇
+
+覆盖《对照补缺》前 10 项（部分合篇），另补类型与 DDL。每篇有机制解释、对比/示例、2～5 句口述、易错点和开源路径，先读概念再练口述。
+
+| 专篇 | 重点摘要 |
+|---|---|
+| [MySQL-redo-binlog与两阶段提交](./MySQL-redo-binlog与两阶段提交.md) | 三类日志、WAL、prepare/commit 崩溃判断、双 1 与组提交 |
+| [MySQL-一条SQL的执行过程](./MySQL-一条SQL的执行过程.md) | Server/引擎边界、查询与更新链路、执行计划和分段排障 |
+| [MySQL-索引下推与BufferPool](./MySQL-索引下推与BufferPool.md) | ICP 与覆盖索引对比、页缓存与刷脏、命中率和容量评估 |
+| [MySQL-深分页与分布式主键](./MySQL-深分页与分布式主键.md) | 延迟关联、复合游标、并发分页边界与自增/号段/UUID/Snowflake |
+| [MySQL-死锁与select-for-update](./MySQL-死锁与select-for-update.md) | 锁范围、双会话死锁实验、监控证据、整笔重试与幂等 |
+| [MySQL-IN-EXISTS与COUNT](./MySQL-IN-EXISTS与COUNT.md) | 半连接与 NULL、COUNT 语义、外连接和条件计数陷阱 |
+| [MySQL-高可用读写分离与MHA](./MySQL-高可用读写分离与MHA.md) | 复制与读写路由、写后读、半同步、MHA 切换和旧主隔离 |
+| [MySQL-类型与DDL注意点](./MySQL-类型与DDL注意点.md) | 字符/金额/时间类型、DELETE/TRUNCATE/DROP 与在线变更风险 |
+
+建议先串联「SQL 执行 → 索引/页缓存 → 日志提交」，再看锁与查询语义，最后讨论分页、主键及高可用。开源中的历史命令和简化结论不直接照背；本篇与专篇已注明 MySQL 8.0/8.4 边界。

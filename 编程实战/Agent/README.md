@@ -25,7 +25,8 @@
 3. `03-实战技巧.md` — 工具设计、提示、评测、安全红线
 4. `04-Debug与排障.md`
 5. `05-代码片段与模式.md` — tool calling 循环、ReAct 口述
-6. 对照 `../开源精选/agent/` 原文 README + `对照补缺.md`
+6. [06-MCP与工具协议](06-MCP与工具协议.md) — 角色、握手、传输、工具错误、安全与恢复
+7. 对照 `../开源精选/agent/` 原文 README + `对照补缺.md`
 
 ## 和本目录其他资料的关系
 
@@ -44,3 +45,8 @@
 - 工具最小权限；输出要校验（schema / allowlist）。
 
 开源摘录见：[`../开源精选/agent/`](../开源精选/agent/)
+
+## 本轮补强
+
+- [06 MCP](06-MCP与工具协议.md)：补 tools/list / tools/call、stdio / Streamable HTTP、错误分层、审批与幂等，固定注明协议参考版本。
+- [04 Debug](04-Debug与排障.md)：补最小评测模板、失败分类、checkpoint/人审恢复检查；低温度不承诺确定性。
