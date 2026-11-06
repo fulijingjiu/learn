@@ -25,7 +25,7 @@
 ## 建议学习顺序
 
 1. `01-总览` → 建立地图  
-2. `02-MySQL专题` → 先 5 个专题，再看全览  
+2. `02-MySQL专题` → 先 5 个基础专题，再按全览进入 8 篇补强专篇  
 3. `03-PostgreSQL`、`04-SQLServer` → 扩库  
 4. `05-对比` → 临考翻  
 5. `06-实战` → 边学边练  
@@ -48,7 +48,15 @@
 | `MySQL-B+树索引.md` | 为何用 B+ 树 |
 | `MySQL-聚簇与非聚簇索引.md` | 聚簇、二级索引、回表 |
 | `MySQL-最左前缀原则.md` | 联合索引用法 |
-| `MySQL-面试八股全览.md` | 锁/MVCC/EXPLAIN/主从等合集 |
+| [MySQL-面试八股全览.md](02-MySQL专题/MySQL-面试八股全览.md) | 高频合集 + 补强主题导航 |
+| [MySQL-redo-binlog与两阶段提交.md](02-MySQL专题/MySQL-redo-binlog与两阶段提交.md) | 三类日志、WAL、prepare/commit 崩溃判断、双 1 与组提交 |
+| [MySQL-一条SQL的执行过程.md](02-MySQL专题/MySQL-一条SQL的执行过程.md) | Server/引擎边界、查询与更新链路、执行计划和分段排障 |
+| [MySQL-索引下推与BufferPool.md](02-MySQL专题/MySQL-索引下推与BufferPool.md) | ICP 与覆盖索引对比、页缓存与刷脏、命中率和容量评估 |
+| [MySQL-深分页与分布式主键.md](02-MySQL专题/MySQL-深分页与分布式主键.md) | 延迟关联、复合游标、并发分页边界与自增/号段/UUID/Snowflake |
+| [MySQL-死锁与select-for-update.md](02-MySQL专题/MySQL-死锁与select-for-update.md) | 锁范围、双会话死锁实验、监控证据、整笔重试与幂等 |
+| [MySQL-IN-EXISTS与COUNT.md](02-MySQL专题/MySQL-IN-EXISTS与COUNT.md) | 半连接与 NULL、COUNT 语义、外连接和条件计数陷阱 |
+| [MySQL-高可用读写分离与MHA.md](02-MySQL专题/MySQL-高可用读写分离与MHA.md) | 复制与读写路由、写后读、半同步、MHA 切换和旧主隔离 |
+| [MySQL-类型与DDL注意点.md](02-MySQL专题/MySQL-类型与DDL注意点.md) | 字符/金额/时间类型、DELETE/TRUNCATE/DROP 与在线变更风险 |
 
 ### 03-PostgreSQL
 | 文件 | 说明 |
@@ -89,3 +97,7 @@
 - 每篇先能口述 2～4 句，再看要点表。  
 - 实战按清单在本地 Docker MySQL 练一遍。  
 - 开源精选用来补缺，不替代本地笔记。  
+
+## 本轮补强范围
+
+已按 [开源对照补缺](07-开源精选/对照补缺.md) 补上前 10 项：日志/两阶段提交、SQL 链路、ICP、Buffer Pool、深分页、分布式主键、死锁、FOR UPDATE、IN/EXISTS/COUNT、高可用；次优先补类型与 DDL。原始开源摘录保持不动，技术细节另用官方文档核验，示例未连接真实数据库执行。
